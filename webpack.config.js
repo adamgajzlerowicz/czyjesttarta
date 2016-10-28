@@ -5,9 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Constants
-const APP = path.join(__dirname, 'app');
+const APP = path.join(__dirname, 'src');
 const BUILD = path.join(__dirname, 'build');
-const TEMPLATE = path.join(__dirname, 'app/templates/index_default.html');
+const TEMPLATE = path.join(__dirname, 'public/index.html');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8081;
 
