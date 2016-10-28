@@ -2,6 +2,8 @@ import {render} from 'react-dom'
 import React from 'react';
 import Radium from 'radium';
 import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import { connect } from 'react-redux';
 
 function add() {
     return {
@@ -16,7 +18,7 @@ function sub() {
 function reducers(state = 0, action) {
     switch (action.type) {
         case 'ADD':
-            return state++;
+            return ++state;
         case 'SUB':
             return state === 0 ? 0 : state--;
         default:
@@ -24,21 +26,13 @@ function reducers(state = 0, action) {
     }
 }
 
-let store = createStore(reducers, '1');
+let store = createStore(reducers, 0);
+window.store = store;
 
 
-let unsubscribe = store.subscribe(() =>
-    console.log(store.getState())
-)
 
-store.dispatch(add());
-
-store.dispatch(add());
-store.dispatch(add());
-
-const App = () => {
-    let state = 0;
-
+const App = ({state, onAdd, onSub, ...props}) => {
+    console.log(props);
     const containerStyle = {
         display: 'flex',
         flexDirection: 'row',
@@ -63,15 +57,23 @@ const App = () => {
     const dialogStyle = {
         margin: 'auto',
         backgroundColor: '#000',
-        color: '#90C5A9',
-        fontSize: '40px'
+        color: '#90C5A9'
     };
 
     return (
         <div style={containerStyle}>
             <div style={innerContainerStyle}>
                 <div style={dialogStyle}>
-                    {state ? "Jest Tarta!" : "Nie ma tarty"}
+                    <p style={{fontSize: '40px'}}>
+                        {state ? "Jest Tarta!" : "Nie ma tarty"}
+                    </p>
+                    <a href="#" onClick={()=> {
+                        store.dispatch(onAdd())
+                    }}>+</a>
+                    <a href="#" onClick={()=> {
+                        store.dispatch(onSub())
+                    }}>-</a>
+                    {state}
                 </div>
             </div>
         </div>
@@ -80,6 +82,30 @@ const App = () => {
 
 const StyledApp = Radium(App);
 
+const mapStateToProps = (state) => {
+    return {
+        state: 0
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAdd: () => {
+            dispatch(add())
+        },
+        onSub: () => {
+            dispatch(sub())
+        }
+    }
+};
+
+const AppWithStore = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(StyledApp);
+
 render((
-    <StyledApp />
+    <Provider store={store}>
+        <AppWithStore />
+    </Provider>
 ), document.getElementById('app'));
