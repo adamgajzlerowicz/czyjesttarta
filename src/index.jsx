@@ -3,7 +3,7 @@ import React from 'react';
 import Radium from 'radium';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
 function add() {
     return {
@@ -15,24 +15,23 @@ function sub() {
         type: 'SUB'
     }
 }
-function reducers(state = 0, action) {
+function reducers(state = {kawalki: 0}, action) {
     switch (action.type) {
         case 'ADD':
-            return ++state;
+            return Object.assign({}, {kawalki: state.kawalki + 1});
         case 'SUB':
-            return state === 0 ? 0 : state--;
+            return state.kawalki === 0 ? state : Object.assign({}, {kawalki: state.kawalki - 1});
         default:
             return state
     }
 }
 
-let store = createStore(reducers, 0);
-window.store = store;
 
+let store = createStore(reducers, {kawalki: 0});
 
+const App = ({onAdd, onSub, ...props}) => {
+    const state = props.kawalki;
 
-const App = ({state, onAdd, onSub, ...props}) => {
-    console.log(props);
     const containerStyle = {
         display: 'flex',
         flexDirection: 'row',
@@ -42,38 +41,58 @@ const App = ({state, onAdd, onSub, ...props}) => {
         bottom: 0,
         left: 0,
         width: '100%',
-        height: '100%',
-        backgroundImage: 'tarta.jpg'
+        height: '100%'
     };
 
     const innerContainerStyle = {
         margin: 'auto',
-        backgroundColor: '#FA8B60',
+        backgroundColor: state === 0 ? 'rgba(250, 139, 96, .6)' : 'rgba(199, 239, 207, .6)',
         display: 'flex',
-        width: '95%',
-        height: '95%',
+        width: '60%',
+        height: '60%',
+        flexDirection: 'column'
     };
 
-    const dialogStyle = {
+    const resultStyle = {
         margin: 'auto',
         backgroundColor: '#000',
         color: '#90C5A9'
     };
 
+    const clickStyle = {
+        padding: 20,
+        color: 'black',
+        fontSize: '70px'
+    };
+
+    const pStyle = {
+        fontSize: '70px',
+        margin: 0,
+        padding: '5px'
+    };
+
+    const buttonsContainerStyle = {
+        margin: 'auto',
+        height: 40
+    };
+
     return (
         <div style={containerStyle}>
             <div style={innerContainerStyle}>
-                <div style={dialogStyle}>
-                    <p style={{fontSize: '40px'}}>
-                        {state ? "Jest Tarta!" : "Nie ma tarty"}
+                <div style={resultStyle}>
+                    <p style={pStyle}>
+                        {state ? "Jest tarta :)" : "Nie ma tarty :("}
                     </p>
-                    <a href="#" onClick={()=> {
-                        store.dispatch(onAdd())
+                </div>
+                <div style={buttonsContainerStyle}>
+                    <a href="#" style={clickStyle} onClick={()=> {
+                        onAdd()
                     }}>+</a>
-                    <a href="#" onClick={()=> {
-                        store.dispatch(onSub())
+                    <span style={clickStyle}>{state}</span>
+                    <a href="#" style={clickStyle} onClick={()=> {
+                        onSub()
                     }}>-</a>
-                    {state}
+
                 </div>
             </div>
         </div>
@@ -83,9 +102,7 @@ const App = ({state, onAdd, onSub, ...props}) => {
 const StyledApp = Radium(App);
 
 const mapStateToProps = (state) => {
-    return {
-        state: 0
-    }
+    return state;
 };
 
 const mapDispatchToProps = (dispatch) => {
