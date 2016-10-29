@@ -7,23 +7,36 @@
     <title>CzyJestTarta.pl</title>
     <meta name="description" content="The HTML5 Herald">
     <meta name="author" content="SitePoint">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
     <style>
         * {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Raleway', sans-serif;
         }
-        /*body{*/
-            /*background-image: url("tarta.jpg");*/
-        /*}*/
+
+        .tarta {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 200px;
+            background-image: url("tarta.jpg");
+            background-size: cover;
+        }
+
+        a, a:hover, a:active {
+            text-decoration: none;
+        }
     </style>
 </head>
 
 <body>
+
+
 <div id="app"></div>
-<!--<script src="js/scripts.js"></script>-->
+<div class="tarta"></div>
 </body>
 </html>

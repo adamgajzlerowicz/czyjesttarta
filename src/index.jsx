@@ -1,9 +1,14 @@
 import {render} from 'react-dom'
 import React from 'react';
 import Radium from 'radium';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {connect} from 'react-redux';
+import thunk from 'redux-thunk';
+import {SocketProvider} from 'socket.io-react';
+import io from 'socket.io-client';
+
+const socket = io.connect(window.location.hostname + ':3000');
 
 function add() {
     return {
@@ -15,24 +20,35 @@ function sub() {
         type: 'SUB'
     }
 }
+function init(val) {
+    return {
+        type: 'INIT',
+        value: {kawalki: val}
+    }
+}
 function reducers(state = {kawalki: 0}, action) {
     switch (action.type) {
         case 'ADD':
             return Object.assign({}, {kawalki: state.kawalki + 1});
         case 'SUB':
             return state.kawalki === 0 ? state : Object.assign({}, {kawalki: state.kawalki - 1});
+        case 'INIT':
+            return state.kawalki = action.value;
         default:
             return state
     }
 }
 
-
-let store = createStore(reducers, {kawalki: 0});
+const store = createStore(
+    reducers,
+    applyMiddleware(thunk)
+);
 
 const App = ({onAdd, onSub, ...props}) => {
     const state = props.kawalki;
 
     const containerStyle = {
+        backgroundColor: 'rgb(14, 177, 210)',
         display: 'flex',
         flexDirection: 'row',
         position: 'fixed',
@@ -46,17 +62,17 @@ const App = ({onAdd, onSub, ...props}) => {
 
     const innerContainerStyle = {
         margin: 'auto',
-        backgroundColor: state === 0 ? 'rgba(250, 139, 96, .6)' : 'rgba(199, 239, 207, .6)',
+        backgroundColor: '#342E37',
         display: 'flex',
-        width: '60%',
-        height: '60%',
-        flexDirection: 'column'
+        width: '95%',
+        height: '95%',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center'
     };
 
     const resultStyle = {
-        margin: 'auto',
-        backgroundColor: '#000',
-        color: '#90C5A9'
+        color: state === 0 ? '#EF3E36' : '#DAEFB3',
     };
 
     const clickStyle = {
@@ -66,15 +82,12 @@ const App = ({onAdd, onSub, ...props}) => {
     };
 
     const pStyle = {
-        fontSize: '70px',
+        fontSize: '85px',
         margin: 0,
         padding: '5px'
     };
 
-    const buttonsContainerStyle = {
-        margin: 'auto',
-        height: 40
-    };
+    const buttonsContainerStyle = {};
 
     return (
         <div style={containerStyle}>
@@ -86,12 +99,12 @@ const App = ({onAdd, onSub, ...props}) => {
                 </div>
                 <div style={buttonsContainerStyle}>
                     <a href="#" style={clickStyle} onClick={()=> {
-                        onAdd()
-                    }}>+</a>
-                    <span style={clickStyle}>{state}</span>
-                    <a href="#" style={clickStyle} onClick={()=> {
                         onSub()
                     }}>-</a>
+                    <span style={clickStyle}>{state}</span>
+                    <a href="#" style={clickStyle} onClick={()=> {
+                        onAdd()
+                    }}>+</a>
 
                 </div>
             </div>
@@ -108,13 +121,19 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onAdd: () => {
-            dispatch(add())
+            socket.emit('add');
+            // dispatch(add())
         },
         onSub: () => {
-            dispatch(sub())
+            socket.emit('sub');
+            // dispatch(sub())
         }
     }
 };
+
+socket.on('state', function (state) {
+    store.dispatch(init(state));
+});
 
 const AppWithStore = connect(
     mapStateToProps,
@@ -126,3 +145,4 @@ render((
         <AppWithStore />
     </Provider>
 ), document.getElementById('app'));
+
