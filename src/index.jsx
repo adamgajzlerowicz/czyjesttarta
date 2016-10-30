@@ -32,13 +32,6 @@ function reducers(state = {
     isLoading: true
 }, action) {
     switch (action.type) {
-        case 'ADD':
-            return Object.assign({},
-                state,
-                {kawalki: state.kawalki + 1}
-            );
-        case 'SUB':
-            return state.kawalki === 0 ? state : Object.assign({}, state, {kawalki: state.kawalki - 1});
         case 'INIT':
             return Object.assign({}, state, state.kawalki = action.value, state.isLoading = false);
         default:
