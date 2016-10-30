@@ -26,7 +26,6 @@ const reducer = (state, action) => {
     switch (action) {
         case 'ADD':
             if(state == 0){
-                console.log('sending')
                 sendSlack();
             }
             return state + 1;
