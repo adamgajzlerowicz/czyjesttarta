@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import thunk from 'redux-thunk';
 import {SocketProvider} from 'socket.io-react';
 import io from 'socket.io-client';
+import {Obrazek} from './components/Obrazek';
 
 const socket = io.connect(window.location.hostname + ':3000');
 
@@ -26,14 +27,20 @@ function init(val) {
         value: {kawalki: val}
     }
 }
-function reducers(state = {kawalki: 0}, action) {
+function reducers(state = {
+    kawalki: 0,
+    isLoading: true
+}, action) {
     switch (action.type) {
         case 'ADD':
-            return Object.assign({}, {kawalki: state.kawalki + 1});
+            return Object.assign({},
+                state,
+                {kawalki: state.kawalki + 1}
+            );
         case 'SUB':
-            return state.kawalki === 0 ? state : Object.assign({}, {kawalki: state.kawalki - 1});
+            return state.kawalki === 0 ? state : Object.assign({}, state, {kawalki: state.kawalki - 1});
         case 'INIT':
-            return state.kawalki = action.value;
+            return Object.assign({}, state, state.kawalki = action.value, state.isLoading = false);
         default:
             return state
     }
@@ -44,8 +51,9 @@ const store = createStore(
     applyMiddleware(thunk)
 );
 
-const App = ({onAdd, onSub, ...props}) => {
+const Main = ({onAdd, onSub, ...props}) => {
     const state = props.kawalki;
+    const isLoading = props.isLoading;
 
     const containerStyle = {
         backgroundColor: 'rgb(14, 177, 210)',
@@ -73,6 +81,7 @@ const App = ({onAdd, onSub, ...props}) => {
 
     const resultStyle = {
         color: state === 0 ? '#EF3E36' : '#DAEFB3',
+        display: isLoading ? 'none' : 'block'
     };
 
     const clickStyle = {
@@ -87,8 +96,15 @@ const App = ({onAdd, onSub, ...props}) => {
         padding: '5px'
     };
 
-    const buttonsContainerStyle = {};
+    const buttonsContainerStyle = {
+        display: isLoading ? 'none' : 'block'
+    };
 
+    const loaderStyle = {
+        display: !isLoading ? 'none' : 'block',
+        color: 'white',
+        fontSize: 25
+    };
     return (
         <div style={containerStyle}>
             <div style={innerContainerStyle}>
@@ -105,9 +121,21 @@ const App = ({onAdd, onSub, ...props}) => {
                     <a href="#" style={clickStyle} onClick={()=> {
                         onAdd()
                     }}>+</a>
-
+                </div>
+                <div style={loaderStyle}>
+                    ...loading
                 </div>
             </div>
+        </div>
+    )
+};
+
+
+const App = ({onAdd, onSub, ...props}) => {
+    return (
+        <div>
+            <Main onAdd={onAdd} onSub={onSub} {...props} />
+            <Obrazek />
         </div>
     )
 };
@@ -118,15 +146,13 @@ const mapStateToProps = (state) => {
     return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = () => {
     return {
         onAdd: () => {
             socket.emit('add');
-            // dispatch(add())
         },
         onSub: () => {
             socket.emit('sub');
-            // dispatch(sub())
         }
     }
 };

@@ -2,7 +2,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server"
+    "start": "NODE_ENV=DEV webpack-dev-server",
+    "build": "NODE_ENV=PROD webpack -p && git push"
   },
   "dependencies": {
     "@slack/client": "^3.6.0",
@@ -35,6 +36,7 @@
     "react-tap-event-plugin": "^1.0.0",
     "react-toolbox": "^1.2.3",
     "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "rumble-charts": "^1.0.7",
     "socket.io": "^1.5.1",
     "socket.io-client": "^1.5.1",
@@ -82,6 +84,7 @@
     "graceful-fs": "^4.1.4",
     "html-minifier": "^1.5.0",
     "html-webpack-plugin": "^2.15.0",
+    "image-webpack-loader": "^3.0.0",
     "jsdom": "^9.1.0",
     "json-loader": "^0.5.4",
     "jsx-ast-utils": "^1.2.1",

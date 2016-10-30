@@ -5,19 +5,6 @@ var fetch = require('node-fetch');
 const config = require("../config.json");
 var state = 0;
 
-function reducers(state = {kawalki: 0}, action) {
-    switch (action.type) {
-        case 'ADD':
-            return Object.assign({}, {kawalki: state.kawalki + 1});
-        case 'SUB':
-            return state.kawalki === 0 ? state : Object.assign({}, {kawalki: state.kawalki - 1});
-        case 'INIT':
-            return state.kawalki = action.value;
-        default:
-            return state
-    }
-}
-
 io.on('connection', function (socket) {
     console.log('connected', socket.handshake.headers.host);
     socket.emit('state', state);

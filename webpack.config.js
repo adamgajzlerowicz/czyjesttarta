@@ -6,12 +6,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // Constants
 const APP = path.join(__dirname, 'src');
-const BUILD = path.join(__dirname, 'build');
-const TEMPLATE = path.join(__dirname, 'public/index.html');
+const BUILD = path.join(__dirname, 'public');
+const TEMPLATE = path.join(__dirname, 'template/index.html');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8081;
 
-module.exports = {
+const config = {
     entry: {
         app: APP
     },
@@ -40,27 +40,30 @@ module.exports = {
             {
                 test: /(\.scss|\.css)$/,
                 loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg)$/i,
+                loaders: [
+                    'file?hash=sha512&digest=hex&name=[hash].[ext]',
+                    'image-webpack?bypassOnDebug&optimizationLevel=7&interlaced=false'
+                ]
             }
         ]
     },
 
     devtool: 'eval-source-map',
-    // webpack-dev-server configuration
     devServer: {
         historyApiFallback: true,
         // hot: true,
         inline: true,
         progress: true,
-
         stats: 'errors-only',
-
         host: HOST,
         port: PORT,
-
         outputPath: BUILD
     },
     plugins: [
-        new ExtractTextPlugin('bundle.css', { allChunks: true }),
+        // new ExtractTextPlugin('bundle.css', { allChunks: true }),
         new HtmlWebpackPlugin({
             template: TEMPLATE,
             // JS placed at the bottom of the body element
@@ -70,9 +73,17 @@ module.exports = {
             'process.env': {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: { warnings: false }
         })
     ],
     node: {
         fs: "empty"
     }
 };
+if(process.env.NODE_ENV == 'PROD'){
+
+}
+
+module.exports = config;
