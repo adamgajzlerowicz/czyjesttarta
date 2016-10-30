@@ -17,7 +17,7 @@
       "host": "198.199.126.9",
       "ref": "origin/master",
       "repo": "https://github.com/adamgajzlerowicz/czyjesttarta.git",
-      "path": "/var/www/test",
+      "path": "/var/www/czyjesttarta.pl",
       "post-deploy": "npm install"
     }
   }
