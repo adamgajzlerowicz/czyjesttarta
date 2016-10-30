@@ -5,18 +5,23 @@
     "start": "NODE_ENV=development webpack-dev-server"
   },
   "dependencies": {
+    "@slack/client": "^3.6.0",
     "autoprefixer": "^6.5.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
     "deep-freeze-node": "^1.1.2",
     "deep-freeze-strict": "^1.1.1",
     "expect": "^1.20.2",
+    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "fetch": "^1.1.0",
     "firebase": "^3.0.5",
     "fs": "0.0.1-security",
+    "http": "0.0.0",
     "immutability-helper": "^2.0.0",
     "immutable": "^3.8.1",
     "marked": "^0.3.5",
     "material-ui": "^0.16.0",
+    "node-fetch": "^1.6.3",
     "path": "^0.12.7",
     "radium": "^0.18.1",
     "react": "^15.1.0",
@@ -34,7 +39,8 @@
     "socket.io": "^1.5.1",
     "socket.io-client": "^1.5.1",
     "socket.io-react": "^1.0.0",
-    "webdriverio": "^4.2.16"
+    "webdriverio": "^4.2.16",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "@kadira/storybook": "^1.28.1",
