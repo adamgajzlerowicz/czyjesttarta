@@ -1,5 +1,6 @@
 import {render} from 'react-dom'
 import React from 'react';
+import Radium from 'radium';
 
 export const Result = ({state, isLoading}) => {
     const resultStyle = {
@@ -22,7 +23,7 @@ export const Result = ({state, isLoading}) => {
     )
 };
 
-export const Buttons = ({onAdd, onSub, isLoading, state}) => {
+const ButtonsRaw = ({onAdd, onSub, isLoading, state}) => {
     const transitionsPositive = {
         transition: '1s ease-out',
         ':hover': {
@@ -49,11 +50,12 @@ export const Buttons = ({onAdd, onSub, isLoading, state}) => {
         <div style={buttonsContainerStyle}>
             <a href="#" style={[clickStyle, transitionsNegative]} onClick={()=> {
                 onSub()
-            }}>-</a>
-            <span style={clickStyle}>{state}</span>
+            }} key={1}>-</a>
+            <span style={clickStyle} key={2}>{state}</span>
             <a href="#" style={[clickStyle, transitionsPositive]} onClick={()=> {
                 onAdd()
-            }}>+</a>
+            }} key={3}>+</a>
         </div>
     )
-}
+};
+export const Buttons = Radium(ButtonsRaw);
