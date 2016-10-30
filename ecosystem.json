@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "czyjesttarta",
+      "script": "app.js",
+      "env": {
+        "COMMON_VARIABLE": "true"
+      },
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    },
+  ],
+  "deploy": {
+    "production": {
+      "user": "root",
+      "host": "198.199.126.9",
+      "ref": "origin/master",
+      "repo": "https://github.com/adamgajzlerowicz/czyjesttarta.git",
+      "path": "/var/www/czyjesttarta.pl",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env production"
+    }
+  }
+}
