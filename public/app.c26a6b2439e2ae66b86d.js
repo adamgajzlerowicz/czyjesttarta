@@ -30365,10 +30365,12 @@ webpackJsonp([0,1,2],[
 	        alignItems: 'center'
 	    };
 
+	    var size = typeof window.orientation !== 'undefined' ? '70px' : '300px';
+
 	    var clickStyle = {
 	        padding: 20,
 	        color: 'black',
-	        fontSize: '70px'
+	        fontSize: size
 	    };
 
 	    var buttonsContainerStyle = {

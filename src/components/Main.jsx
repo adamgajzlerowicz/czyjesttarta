@@ -31,11 +31,12 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
         alignItems: 'center'
     };
 
+    const size = typeof window.orientation !== 'undefined' ? '70px' : '300px';
 
     const clickStyle = {
         padding: 20,
         color: 'black',
-        fontSize: '70px'
+        fontSize:  size
     };
 
     const buttonsContainerStyle = {
