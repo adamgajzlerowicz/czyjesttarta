@@ -30365,7 +30365,7 @@ webpackJsonp([0,1,2],[
 	        alignItems: 'center'
 	    };
 
-	    var size = typeof window.orientation !== 'undefined' ? '70px' : '300px';
+	    var size = screen.width >= 480 ? '70px' : '300px';
 
 	    var clickStyle = {
 	        padding: 20,

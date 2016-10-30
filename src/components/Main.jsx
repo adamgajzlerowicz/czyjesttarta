@@ -31,7 +31,9 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
         alignItems: 'center'
     };
 
-    const size = typeof window.orientation !== 'undefined' ? '70px' : '300px';
+
+
+    const size = screen.width >= 480 ? '70px' : '300px';
 
     const clickStyle = {
         padding: 20,
