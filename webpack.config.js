@@ -3,6 +3,7 @@ const path = require('path');
 const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // Constants
 const APP = path.join(__dirname, 'src');
@@ -74,15 +75,18 @@ const config = {
                 'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
             }
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: { warnings: false }
+        new CleanWebpackPlugin(['dist', 'build'], {
+            root: './public',
+            verbose: true,
+            dry: false,
+            exclude: ['favicon.png']
         })
     ],
     node: {
         fs: "empty"
     }
 };
-if(process.env.NODE_ENV == 'PROD'){
+if (process.env.NODE_ENV == 'PROD') {
 
 }
 
