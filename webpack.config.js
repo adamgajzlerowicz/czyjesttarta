@@ -12,6 +12,7 @@ const TEMPLATE = path.join(__dirname, 'template/index.html');
 const HOST = process.env.HOST || '0.0.0.0';
 const PORT = process.env.PORT || 8081;
 
+
 const config = {
     entry: {
         app: APP
@@ -52,7 +53,7 @@ const config = {
         ]
     },
 
-    devtool: 'eval-source-map',
+    devtool: 'cheap-module-source-map',
     devServer: {
         historyApiFallback: true,
         // hot: true,
@@ -67,27 +68,25 @@ const config = {
         // new ExtractTextPlugin('bundle.css', { allChunks: true }),
         new HtmlWebpackPlugin({
             template: TEMPLATE,
-            // JS placed at the bottom of the body element
             inject: 'body'
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+                'NODE_ENV': JSON.stringify('production')
             }
         }),
-        new CleanWebpackPlugin(['dist', 'build'], {
-            root: './public',
+        new CleanWebpackPlugin(['public'], {
             verbose: true,
             dry: false,
             exclude: ['favicon.png']
         })
     ],
     node: {
-        fs: "empty"
-    }
+        console: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty'
+    },
 };
-if (process.env.NODE_ENV == 'PROD') {
-
-}
 
 module.exports = config;
