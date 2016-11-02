@@ -90,7 +90,7 @@ module.exports = {
         }),
         // Clean build directory
         new CleanPlugin([BUILD],{
-            exclude: ['favicon.png']
+            // exclude: ['favicon.png']
         }),
 
         // Auto generate index.html
@@ -115,7 +115,11 @@ module.exports = {
             names: ['vendor', 'manifest']
         }),
 
-        // Minify JavaScript
+        new CopyWebpackPlugin([
+            { from: 'template/tarta.jpg', to: 'tarta.jpg' },
+            { from: 'template/favicon.png', to: 'favicon.png' }
+        ])
+
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {
         //         warnings: false

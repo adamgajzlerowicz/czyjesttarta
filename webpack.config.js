@@ -4,6 +4,7 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Constants
 const APP = path.join(__dirname, 'src');
@@ -79,7 +80,11 @@ const config = {
             verbose: true,
             dry: false,
             exclude: ['favicon.png']
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: 'template/tarta.jpg', to: 'tarta.jpg' },
+            { from: 'template/favicon.png', to: 'favicon.png' }
+        ])
     ],
     node: {
         console: 'empty',

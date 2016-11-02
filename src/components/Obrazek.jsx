@@ -1,6 +1,6 @@
 import {render} from 'react-dom'
 import React from 'react';
-const tlo = require('../../template/tarta.jpg');
+// const tlo = require('../../template/tarta.jpg');
 
 export const Obrazek = () => {
     const style = {
@@ -9,7 +9,7 @@ export const Obrazek = () => {
         right: '20px',
         width: '200px',
         height: '200px',
-        backgroundImage: 'url('+tlo+')',
+        backgroundImage: 'url(tarta.jpg)',
         backgroundSize: 'cover'
     };
     return (

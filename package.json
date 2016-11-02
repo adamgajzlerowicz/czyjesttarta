@@ -5,7 +5,7 @@
     "start": "NODE_ENV=DEV webpack-dev-server",
     "build": "NODE_ENV=production webpack --config webpack.prod.config.js",
     "server": "node server/index.js",
-    "deploy" : "npm run build && pm2 deploy ecosystem.json production"
+    "deploy": "npm run build && pm2 deploy ecosystem.json production"
   },
   "dependencies": {
     "@slack/client": "^3.6.0",
@@ -76,7 +76,7 @@
     "chai": "^3.5.0",
     "chai-immutable": "^1.5.4",
     "clean-webpack-plugin": "^0.1.13",
-    "copy-webpack-plugin": "^2.1.1",
+    "copy-webpack-plugin": "^2.1.6",
     "css-loader": "^0.23.1",
     "enzyme": "^2.3.0",
     "eslint": "^2.9.0",
