@@ -118,12 +118,12 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: 'template/tarta.jpg', to: 'tarta.jpg' },
             { from: 'template/favicon.png', to: 'favicon.png' }
-        ])
+        ]),
 
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //         warnings: false
-        //     }
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            }
+        })
     ]
 };
