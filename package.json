@@ -24,6 +24,9 @@
     "copy-webpack-plugin": "^4.0.1",
     "deep-freeze-node": "^1.1.2",
     "deep-freeze-strict": "^1.1.1",
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1",
+    "eslint-plugin-react": "^6.10.3",
     "expect": "^1.20.2",
     "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -56,9 +59,12 @@
     "socket.io-react": "^1.0.0",
     "webdriverio": "^4.2.16",
     "webpack": "latest",
+    "webpack-dev-server": "^2.4.2",
     "webpack-uglify-js-plugin": "^1.1.9",
-    "whatwg-fetch": "^1.0.0",
-     "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.1"
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3"
   }
 }

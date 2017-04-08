@@ -1,4 +1,4 @@
-import {render} from 'react-dom'
+import {render} from 'react-dom';
 import React from 'react';
 
 export const Result = ({state, isLoading}) => {
@@ -16,8 +16,8 @@ export const Result = ({state, isLoading}) => {
     return (
         <div style={resultStyle}>
             <p style={pStyle}>
-                {state ? "Jest tarta :)" : "Nie ma tarty :("}
+                {state ? 'Jest tarta :)' : 'Nie ma tarty :('}
             </p>
         </div>
-    )
+    );
 };

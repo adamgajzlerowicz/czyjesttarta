@@ -1,4 +1,4 @@
-import {render} from 'react-dom'
+import {render} from 'react-dom';
 import React from 'react';
 import Radium from 'radium';
 import {Result} from './Bits';
@@ -73,11 +73,11 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
                 <Result state={state} isLoading={isLoading} />
                 <div style={buttonsContainerStyle}>
                     <a key={1} href="#" style={[clickStyle, transitionsNegative]} onClick={()=> {
-                        onSub()
+                        onSub();
                     }}>-</a>
                     <span key={2} style={clickStyle}>{state}</span>
                     <a href="#" style={[clickStyle, transitionsPositive]} onClick={()=> {
-                        onAdd()
+                        onAdd();
                     }}>+</a>
                 </div>
                 <div style={loaderStyle} key={3}>
@@ -85,7 +85,7 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
                 </div>
             </div>
         </div>
-    )
+    );
 };
 
 export const Main = Radium(UnstyledMain);
