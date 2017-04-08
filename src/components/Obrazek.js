@@ -1,4 +1,3 @@
-import {render} from 'react-dom'
 import React from 'react';
 // const tlo = require('../../template/tarta.jpg');
 
@@ -14,5 +13,5 @@ export const Obrazek = () => {
     };
     return (
         <div style={style}></div>
-    )
+    );
 };

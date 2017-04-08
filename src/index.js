@@ -4,10 +4,10 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {connect} from 'react-redux';
 import thunk from 'redux-thunk';
-var socket = require('socket.io-client')(window.location.hostname + ':3000');
 import reducers from './reducers';
 import {init} from './actions';
 import {App} from './App';
+var socket = require('socket.io-client')(window.location.hostname + ':3000');
 
 const store = createStore(
     reducers,
