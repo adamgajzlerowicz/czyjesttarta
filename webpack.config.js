@@ -1,8 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -24,25 +22,19 @@ const config = {
         publicPath: '/'
     },
     resolve: {
-        extensions: ['', '.js', '.jsx', '.css', '.scss'],
-        modulesDirectories: [
+        extensions: ['.js', '.jsx', '.css'],
+        modules: [
             'node_modules',
             path.resolve(__dirname, './node_modules')
         ]
     },
     module: {
-        loaders: [
+        rules: [
             {
-                test: /\.jsx?$/,         // Match both .js and .jsx files
+                test: /\.jsx?$/,   
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    presets: ['react', 'es2015', 'stage-0']
-                }
-            },
-            {
-                test: /(\.scss|\.css)$/,
-                loader: ExtractTextPlugin.extract('style', 'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss!sass')
+                loader: 'babel-loader'
+            
             },
             {
                 test: /\.(jpe?g|png|gif|svg)$/i,
@@ -53,20 +45,16 @@ const config = {
             }
         ]
     },
-
+    
     devtool: 'cheap-module-source-map',
     devServer: {
         historyApiFallback: true,
-        // hot: true,
         inline: true,
-        progress: true,
         stats: 'errors-only',
         host: HOST,
-        port: PORT,
-        outputPath: BUILD
+        port: PORT
     },
     plugins: [
-        // new ExtractTextPlugin('bundle.css', { allChunks: true }),
         new HtmlWebpackPlugin({
             template: TEMPLATE,
             inject: 'body'
@@ -82,16 +70,10 @@ const config = {
             exclude: ['favicon.png']
         }),
         new CopyWebpackPlugin([
-            { from: 'template/tarta.jpg', to: 'tarta.jpg' },
-            { from: 'template/favicon.png', to: 'favicon.png' }
+    { from: 'template/tarta.jpg', to: 'tarta.jpg' },
+    { from: 'template/favicon.png', to: 'favicon.png' }
         ])
     ],
-    node: {
-        console: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
 };
 
 module.exports = config;

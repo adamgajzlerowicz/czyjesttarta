@@ -78,7 +78,7 @@ module.exports = {
         tls: 'empty'
     },
     // Remove comment if you require sourcemaps for your production code
-    // devtool: 'cheap-module-source-map',
+    devtool: 'cheap-module-source-map',
     plugins: [
         // Required to inject NODE_ENV within React app.
         // Reduntant package.json script entry does not do that, but required for .babelrc
@@ -111,9 +111,9 @@ module.exports = {
         // new webpack.optimize.DedupePlugin(),
 
         // Separate vendor and manifest files
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor', 'manifest']
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     names: ['vendor', 'manifest']
+        // }),
 
         new CopyWebpackPlugin([
             { from: 'template/tarta.jpg', to: 'tarta.jpg' },
