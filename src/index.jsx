@@ -1,4 +1,4 @@
-import {render} from 'react-dom'
+import {render} from 'react-dom';
 import React from 'react';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import thunk from 'redux-thunk';
 var socket = require('socket.io-client')(window.location.hostname + ':3000');
 import reducers from './reducers';
-import {add, sub, init} from './actions';
+import {init} from './actions';
 import {App} from './App';
 
 const store = createStore(
@@ -26,7 +26,7 @@ const mapDispatchToProps = () => {
         onSub: () => {
             socket.emit('sub');
         }
-    }
+    };
 };
 
 socket.on('state', function (state) {
@@ -43,4 +43,3 @@ render((
         <AppWithStore />
     </Provider>
 ), document.getElementById('app'));
-

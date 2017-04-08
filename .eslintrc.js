@@ -8,14 +8,20 @@ module.exports = {
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
-            "jsx": true
+            "jsx": true, 
+            "modules": true
         },
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "eslint-plugin-react"
     ],
     "rules": {
+        "strict": [2, "never"],
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": [2],
+        "react/react-in-jsx-scope": [2],
         "indent": [
             "error",
             4

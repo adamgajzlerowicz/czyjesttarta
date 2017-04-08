@@ -3,9 +3,9 @@ export default function reducers(state = {
     isLoading: true
 }, action) {
     switch (action.type) {
-        case 'INIT':
-            return Object.assign({}, state, state.kawalki = action.value, state.isLoading = false);
-        default:
-            return state
+    case 'INIT':
+        return Object.assign({}, state, state.kawalki = action.value, state.isLoading = false);
+    default:
+        return state;
     }
 }
