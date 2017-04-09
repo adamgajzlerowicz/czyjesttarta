@@ -23,7 +23,7 @@
       "babelrc": true
     },
     "require": [
-       "babel-polyfill",
+      "babel-polyfill",
       "babel-register",
       "./test/setupAva.js"
     ]
@@ -92,5 +92,6 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-plugin-react": "^6.10.3"
-  }
+  },
+  "version": "0.0.1"
 }
