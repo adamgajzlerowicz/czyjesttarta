@@ -1,6 +1,6 @@
 import React from 'react';
 import Radium from 'radium';
-import {Result} from './Bits';
+import Bits from './Bits';
 
 const UnstyledMain = ({onAdd, onSub, ...props}) => {
     const state = props.kawalki;
@@ -69,7 +69,7 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
     return (
         <div style={containerStyle}>
             <div style={innerContainerStyle}>
-                <Result state={state} isLoading={isLoading} />
+                <Bits state={state} isLoading={isLoading} />
                 <div style={buttonsContainerStyle}>
                     <a key={1} href="#" style={[clickStyle, transitionsNegative]} onClick={()=> {
                         onSub();

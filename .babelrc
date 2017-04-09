@@ -1,3 +1,4 @@
 {
-  "presets": ["react", "es2015", "es2017", "airbnb"]
+  "presets": [ "es2015", "es2017", "stage-1", "airbnb", "react", "@ava/stage-4", "@ava/transform-test-files"],
+  "plugins": ["transform-runtime"]
 }

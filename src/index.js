@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 import {init} from './actions';
 import {App} from './App';
+
 var socket = require('socket.io-client')(window.location.hostname + ':3000');
 
 const store = createStore(

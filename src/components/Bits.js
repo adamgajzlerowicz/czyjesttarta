@@ -1,6 +1,7 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
-export const Result = ({state, isLoading}) => {
+const Bits = ({state, isLoading}) => {
     const resultStyle = {
         color: state === 0 ? '#EF3E36' : '#DAEFB3',
         display: isLoading ? 'none' : 'block'
@@ -19,4 +20,11 @@ export const Result = ({state, isLoading}) => {
             </p>
         </div>
     );
+};
+Bits.PropTypes = {
+    state: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool.isRequired
+};
+export {
+    Bits as default
 };
