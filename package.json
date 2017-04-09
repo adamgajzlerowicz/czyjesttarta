@@ -82,7 +82,7 @@
     "path": "^0.12.7",
     "prop-types": "^15.5.4",
     "radium": "^0.18.1",
-    "react": "latest",
+    "react": "15.4.2",
     "react-addons-css-transition-group": "^15.3.2",
     "react-addons-test-utils": "^15.5.1",
     "react-bootstrap": "^0.30.5",

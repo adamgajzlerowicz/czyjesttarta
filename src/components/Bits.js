@@ -21,7 +21,7 @@ const Bits = ({state, isLoading}) => {
         </div>
     );
 };
-Bits.PropTypes = {
+Bits.propTypes = {
     state: PropTypes.number.isRequired,
     isLoading: PropTypes.bool.isRequired
 };
