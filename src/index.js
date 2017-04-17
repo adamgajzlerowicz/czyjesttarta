@@ -8,7 +8,7 @@ import reducers from './reducers';
 import {init} from './actions';
 import {App} from './App';
 
-var socket = require('socket.io-client')(window.location.hostname + ':3000');
+const socket = require('socket.io-client')(window.location.hostname + ':3000');
 
 const store = createStore(
     reducers,

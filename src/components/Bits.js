@@ -1,7 +1,7 @@
 import React from 'react';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 
-const Bits = ({state, isLoading}) => {
+const Bits = ({ state, isLoading }) => {
     const resultStyle = {
         color: state === 0 ? '#EF3E36' : '#DAEFB3',
         display: isLoading ? 'none' : 'block'
