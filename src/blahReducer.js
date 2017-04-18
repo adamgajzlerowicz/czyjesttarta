@@ -1,3 +1,4 @@
+// @flow
 import test from 'ava';
 
 const FOO = 'FOOlkjsdf;lkajsdf';
