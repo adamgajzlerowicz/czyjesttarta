@@ -66,6 +66,8 @@
     "node-fetch": "^1.6.3",
     "nyc": "^10.2.0",
     "path": "^0.12.7",
+    "postcss-easy-import": "^3.0.0",
+    "precss": "^2.0.0",
     "prop-types": "^15.5.4",
     "radium": "^0.18.1",
     "react": "15.4.2",
