@@ -1,18 +1,9 @@
 const webpack = require('webpack');
-
-// File ops
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-// Folder ops
 const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
-const precss = require('precss');
-const autoprefixer = require('autoprefixer');
-
-// Constants
 const APP = path.join(__dirname, 'src');
 const BUILD = path.join(__dirname, 'public');
 const TEMPLATE = path.join(__dirname, 'template/index.html');
@@ -27,8 +18,7 @@ module.exports = {
     },
     output: {
         path: BUILD,
-        filename: 'app.js',
-        publicPath: '/'
+        filename: 'app.js'
     },
     module: {
         loaders: [
@@ -37,8 +27,6 @@ module.exports = {
                 loaders: ['babel-loader?cacheDirectory'],
                 include: APP
             },
-
-            // Process JSON data fixtures
 
             {
                 test: /\.es6$/,
@@ -63,12 +51,9 @@ module.exports = {
         net: 'empty',
         tls: 'empty'
     },
-    // Remove comment if you require sourcemaps for your production code
+
     devtool: 'cheap-module-source-map',
     plugins: [
-        // Required to inject NODE_ENV within React app.
-        // Reduntant package.json script entry does not do that, but required for .babelrc
-        // Optimizes React for use in production mode
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production') // eslint-disable-line quote-props
@@ -89,17 +74,6 @@ module.exports = {
                 collapseWhitespace: true
             }
         }),
-
-        // Extract CSS to a separate file
-        // new ExtractTextPlugin('[name].[chunkhash].css'),
-
-        // Remove comment to dedupe duplicating dependencies for larger projects
-        // new webpack.optimize.DedupePlugin(),
-
-        // Separate vendor and manifest files
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     names: ['vendor', 'manifest']
-        // }),
 
         new CopyWebpackPlugin([
             { from: 'template/tarta.jpg', to: 'tarta.jpg' },
