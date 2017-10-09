@@ -9,8 +9,6 @@ const CleanPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
-// PostCSS support
-const postcssImport = require('postcss-easy-import');
 const precss = require('precss');
 const autoprefixer = require('autoprefixer');
 
@@ -25,19 +23,18 @@ module.exports = {
         app: APP,
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     output: {
         path: BUILD,
-        filename: '[name].[chunkhash].js',
-        chunkFilename: '[chunkhash].js',
+        filename: 'app.js',
         publicPath: '/'
     },
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: ['babel?cacheDirectory'],
+                loaders: ['babel-loader?cacheDirectory'],
                 include: APP
             },
 
@@ -61,18 +58,7 @@ module.exports = {
 
         ]
     },
-    // Configure PostCSS plugins
-    postcss: function processPostcss(webpack) {  // eslint-disable-line no-shadow
-        return [
-            postcssImport({
-                addDependencyTo: webpack
-            }),
-            precss,
-            autoprefixer({ browsers: ['last 2 versions'] })
-        ];
-    },
     node: {
-        console: 'empty',
         fs: 'empty',
         net: 'empty',
         tls: 'empty'
@@ -88,9 +74,9 @@ module.exports = {
                 'NODE_ENV': JSON.stringify('production') // eslint-disable-line quote-props
             }
         }),
-        // Clean build directory
+
         new CleanPlugin([BUILD],{
-            // exclude: ['favicon.png']
+            exclude: ['favicon.png']
         }),
 
         // Auto generate index.html
@@ -105,7 +91,7 @@ module.exports = {
         }),
 
         // Extract CSS to a separate file
-        new ExtractTextPlugin('[name].[chunkhash].css'),
+        // new ExtractTextPlugin('[name].[chunkhash].css'),
 
         // Remove comment to dedupe duplicating dependencies for larger projects
         // new webpack.optimize.DedupePlugin(),
