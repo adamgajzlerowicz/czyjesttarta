@@ -10,24 +10,18 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
         backgroundColor: 'rgb(14, 177, 210)',
         display: 'flex',
         flexDirection: 'row',
-        position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        width: '100%',
+        position: 'relative',
         height: '100%'
     };
 
     const innerContainerStyle = {
-        margin: 'auto',
         backgroundColor: '#342E37',
         display: 'flex',
-        width: '95%',
-        height: '95%',
         flexDirection: 'column',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        flex: '1',
+        margin: 10
     };
 
 
