@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 const APP = path.join(__dirname, 'src');
-const BUILD = path.join(__dirname, 'public');
+const BUILD = path.join(__dirname, 'docs');
 const TEMPLATE = path.join(__dirname, 'template/index.html');
 
 
@@ -61,7 +61,7 @@ module.exports = {
         }),
 
         new CleanPlugin([BUILD],{
-            exclude: ['favicon.png']
+            exclude: ['favicon.png', '.gitkeep']
         }),
 
         // Auto generate index.html
