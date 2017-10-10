@@ -2,7 +2,7 @@ import React from 'react';
 import Radium from 'radium';
 import Bits from './Bits';
 
-const UnstyledMain = ({onAdd, onSub, ...props}) => {
+const UnstyledMain = ({setKawalki, ...props}) => {
     const state = props.kawalki;
     const isLoading = props.isLoading;
 
@@ -66,11 +66,11 @@ const UnstyledMain = ({onAdd, onSub, ...props}) => {
                 <Bits state={state} isLoading={isLoading} />
                 <div style={buttonsContainerStyle}>
                     <a key={1} href="#" style={[clickStyle, transitionsNegative]} onClick={()=> {
-                        onSub();
+                        setKawalki(state <= 0 ? 0 : state - 1);
                     }}>-</a>
                     <span key={2} style={clickStyle}>{state}</span>
                     <a href="#" style={[clickStyle, transitionsPositive]} onClick={()=> {
-                        onAdd();
+                        setKawalki(state + 1);
                     }}>+</a>
                 </div>
                 <div style={loaderStyle} key={3}>

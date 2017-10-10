@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import {connect} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import {init, add, sub} from './actions';
+import {init, setKawalki} from './actions';
 import {App} from './App';
 import connectToFirebase from './connect';
 
@@ -29,11 +29,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAdd: () => {
-            dispatch(add());
-        },
-        onSub: () => {
-            dispatch(sub());
+        setKawalki: (val) => {
+            dispatch(setKawalki(val));
         }
     };
 };

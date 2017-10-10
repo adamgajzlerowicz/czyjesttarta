@@ -1,13 +1,15 @@
-export const add = () => {
+import connect from './connect';
+const database = connect.database();
+
+export const setKawalki = (kawalki) => {
+
+    database.ref('czyjesttarta').set(kawalki);
+
     return {
-        type: 'ADD'
+        type: 'SET_KAWALKI', payload: kawalki
     };
 };
-export const sub = () => {
-    return {
-        type: 'SUB'
-    };
-};
+
 export const init = (val) => {
     return {
         type: 'INIT',

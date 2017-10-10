@@ -84,7 +84,7 @@
     "react-dom": "15.4.2",
     "react-redux": "latest",
     "react-tap-event-plugin": "^1.0.0",
-    "redux": "latest",
+    "redux": "3.7.2",
     "redux-thunk": "^2.2.0",
     "rumble-charts": "^1.0.7",
     "socket.io": "^1.5.1",
