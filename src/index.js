@@ -5,10 +5,18 @@ import {Provider} from 'react-redux';
 import {connect} from 'react-redux';
 import thunk from 'redux-thunk';
 import reducers from './reducers';
-import {init} from './actions';
+import {init, add, sub} from './actions';
 import {App} from './App';
+import connectToFirebase from './connect';
 
-const socket = require('socket.io-client')(window.location.hostname + ':3000');
+const database = connectToFirebase.database();
+
+const dataSource = database.ref('czyjesttarta');
+
+dataSource.on('value', (snapshot) => {
+    store.dispatch(init(snapshot.val()));
+});
+
 
 const store = createStore(
     reducers,
@@ -19,20 +27,17 @@ const mapStateToProps = (state) => {
     return state;
 };
 
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
     return {
         onAdd: () => {
-            socket.emit('add');
+            dispatch(add());
         },
         onSub: () => {
-            socket.emit('sub');
+            dispatch(sub());
         }
     };
 };
 
-socket.on('state', function (state) {
-    store.dispatch(init(state));
-});
 
 const AppWithStore = connect(
     mapStateToProps,
@@ -41,6 +46,6 @@ const AppWithStore = connect(
 
 render((
     <Provider store={store}>
-        <AppWithStore />
+        <AppWithStore/>
     </Provider>
 ), document.getElementById('app'));
